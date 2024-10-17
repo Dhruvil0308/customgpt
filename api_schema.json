@@ -1,0 +1,77 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Mike and Dona Chatbot API",
+      "version": "1.0.0",
+      "description": "API for the Mike and Dona Chatbot, handling user input and task management with integration to Google Calendar."
+    },
+    "servers": [
+      {
+        "url": "https://backend-login-6x56.onrender.com",
+        "description": "Main API endpoint for the Mike and Dona chatbot."
+      }
+    ],
+    "paths": {
+      "/tasks": {
+        "post": {
+          "operationId": "createTask",
+          "summary": "Create a new task",
+          "description": "Mike stores tasks based on user input.",
+          "responses": {
+            "201": {
+              "description": "Task created successfully."
+            }
+          }
+        }
+      },
+      "/tasks/{taskId}": {
+        "get": {
+          "operationId": "getTaskById",
+          "summary": "Retrieve a specific task",
+          "description": "Dona retrieves and summarizes tasks for posting to Google Calendar.",
+          "parameters": [
+            {
+              "name": "taskId",
+              "in": "path",
+              "required": true,
+              "description": "ID of the task to retrieve.",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Task retrieved successfully."
+            },
+            "404": {
+              "description": "Task not found."
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Task": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique ID of the task."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the task."
+            },
+            "dueDate": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Due date of the task."
+            }
+          }
+        }
+      }
+    }
+  }
+  
